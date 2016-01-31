@@ -44,3 +44,11 @@ Developers should run these often!
 
 Source code distributed under the MIT license. Text and other assets copyright
 General Assembly, Inc., all rights reserved.
+
+## Wireframe
+./projects/Tic-Tac-Toe/Tic-Tac-Toe_wireframe
+
+## User Stories
+When I press New Game, I want to reset the gameboard so I can play another game.
+When I press on a block, I want to mark with a symbol so I can continue the game.
+When there are 3 symbols in a row, I want to indicate a winner so I can start a new game.

@@ -1,7 +1,69 @@
-$background-color: #4e4e4e;
-$font-color: #dfdfdf;
+@import url(https://fonts.googleapis.com/css?family=Bangers);
+
+$background: #055;
+$def-color: #F0F0F0;
+$footer: #000;
+$game-board-height: 50%;
+$game-board-width: 50%;
+$game-box-height: $game-board-height / 3;
+$game-box-width: $game-board-width / 3;
+$red: #f00;
+$white: #fff;
 
 body {
-  background-color: $background-color;
-  color: $font-color;
+  background-color: $background;
+  color: $def-color;
+  font-family: 'Bangers', cursive;
+  font-size: 14px;
+}
+
+#container {
+  margin: auto;
+  max-width: 1080px;
+}
+
+.title {
+  font-size: 2em;
+  text-align: center;
+}
+
+.buttons {
+  font-size: 1.7em;
+  text-align: center;
+}
+
+#gameboard {
+  border: 5px solid $red;
+  height: $game-board-height;
+  margin: 1em auto;
+  width: $game-board-width;
+}
+
+.row {
+  height: $game-box-height;
+  width: 100%;
+}
+
+.box {
+  border-radius: 1px;
+  border: 2px solid $white;
+  display: inline-block;
+  height: $game-box-height;
+  text-align: center;
+  width: 31.7%;
+}
+
+footer {
+  background-color: $footer;
+  font-size: 1.2em;
+  padding: 1em;
+  text-align: center;
+}
+
+strong {
+  color: $red;
+}
+
+.box:hover {
+  background-color: $red;
 }

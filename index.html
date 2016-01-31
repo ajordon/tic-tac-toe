@@ -1,11 +1,49 @@
 <!DOCTYPE html>
 <html>
-    <head>
-      <title>Example</title>
-    </head>
-    <body>
-      <script src="http://localhost:8080/webpack-dev-server.js"></script>
-      <script src="vendor.bundle.js" type="text/javascript" charset="utf-8"></script>
-      <script src="bundle.js" type="text/javascript" charset="utf-8"></script>
-    </body>
+	<head>
+		<title>Tic-Tac-Toe</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+
+	<body>
+		<div id="container">
+			<header>
+				<div class="title">
+					<h1>TIC <strong>- TAC - </strong>TOE</h1>
+				</div>
+				<form>
+					<div class="buttons">
+						<input type ="submit" value = "New Game">
+					</div>
+				</form>
+			</header>
+
+			<div class="clearfix" id="gameboard">
+				<!-- <img src="images/background.jpg" id="heropic" alt="California" title="the beach"> -->
+				<div class="row">
+					<div class = "box">a1</div>
+					<div class = "box">a2</div>
+					<div class = "box">a3</div>
+				</div>
+				<div class="row">
+					<div class = "box">b1</div>
+					<div class = "box">b2</div>
+					<div class = "box">b3</div>
+				</div>
+				<div class="row">
+					<div class = "box">c1</div>
+					<div class = "box">c2</div>
+					<div class = "box">c3</div>
+				</div>
+			</div>
+
+			<footer>
+				<p>Copyright &copy of Aaron Jordon</p>
+			</footer>
+		</div>
+
+    <script src="http://localhost:8080/webpack-dev-server.js"></script>
+    <script src="vendor.bundle.js" type="text/javascript" charset="utf-8"></script>
+    <script src="bundle.js" type="text/javascript" charset="utf-8"></script>
+	</body>
 </html>
