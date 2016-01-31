@@ -11,31 +11,27 @@
 				<div class="title">
 					<h1>TIC <strong>- TAC - </strong>TOE</h1>
 				</div>
-				<form>
-					<div class="buttons">
-						<input type ="submit" value = "New Game">
+				<div class="currentgame">
+					<div class= "score">Score : <br />
+						<small>X - </small>0 / <small> O -</small> 0
 					</div>
-				</form>
+					<div class= "turn">Turn : <br /></div>
+				</div>
 			</header>
 
-			<div class="clearfix" id="gameboard">
-				<!-- <img src="images/background.jpg" id="heropic" alt="California" title="the beach"> -->
-				<div class="row">
-					<div class = "box">a1</div>
-					<div class = "box">a2</div>
-					<div class = "box">a3</div>
-				</div>
-				<div class="row">
-					<div class = "box">b1</div>
-					<div class = "box">b2</div>
-					<div class = "box">b3</div>
-				</div>
-				<div class="row">
-					<div class = "box">c1</div>
-					<div class = "box">c2</div>
-					<div class = "box">c3</div>
-				</div>
+			<div class="canvas" id="gameboard">
+				<canvas class="top-left" onclick="canvasClicked(1)"></canvas>
+				<canvas class="top-middle" onclick="canvasClicked(2)"></canvas>
+				<canvas class="top-right" onclick="canvasClicked(3)"></canvas></br>
+				<canvas class="middle-left" onclick="canvasClicked(4)"></canvas>
+				<canvas class="middle-middle" onclick="canvasClicked(5)"></canvas>
+				<canvas class="middle-right" onclick="canvasClicked(6)"></canvas></br>
+				<canvas class="bottom-left" onclick="canvasClicked(7)"></canvas>
+				<canvas class="bottom-middle" onclick="canvasClicked(8)"></canvas>
+				<canvas class="bottom-right" onclick="canvasClicked(9)"></canvas>
 			</div>
+
+			<button id="reset">Reset</button>
 
 			<footer>
 				<p>Copyright &copy of Aaron Jordon</p>

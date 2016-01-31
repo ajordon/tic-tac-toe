@@ -1,14 +1,15 @@
 @import url(https://fonts.googleapis.com/css?family=Bangers);
 
-$background: #055;
-$def-color: #F0F0F0;
-$footer: #000;
+$background: #151469;
+$def-color: #f0f0f0;
+$footer-color: #000;
 $game-board-height: 50%;
 $game-board-width: 50%;
 $game-box-height: $game-board-height / 3;
 $game-box-width: $game-board-width / 3;
 $red: #f00;
 $white: #fff;
+$canvas-hover: #c3dfe8;
 
 body {
   background-color: $background;
@@ -20,6 +21,7 @@ body {
 #container {
   margin: auto;
   max-width: 1080px;
+  min-height: 600px;
 }
 
 .title {
@@ -27,36 +29,60 @@ body {
   text-align: center;
 }
 
-.buttons {
+.currentgame {
+  font-size: 1.5em;
+  margin: 0 auto;
+  padding: 1em;
+  text-decoration: underline;
+}
+
+.score {
+  float: right;
+  padding-right: 2em;
+}
+
+.turn {
+  float: left;
+  padding-left: 2em;
+}
+
+button {
+  background-color: $red;
+  border-radius: 3px;
+  border: 3px solid $red;
+  color: $white;
+  cursor: pointer;
+  font-family: 'Bangers', cursive;
   font-size: 1.7em;
+  font-weight: 1.2em;
+  padding: .6em;
+  position: relative;
   text-align: center;
+  transition: all .2s ease-in-out;
 }
 
 #gameboard {
-  border: 5px solid $red;
-  height: $game-board-height;
+  border: 2px solid $red;
+  clear: both;
   margin: 1em auto;
-  width: $game-board-width;
-}
-
-.row {
-  height: $game-box-height;
-  width: 100%;
-}
-
-.box {
-  border-radius: 1px;
-  border: 2px solid $white;
-  display: inline-block;
-  height: $game-box-height;
+  min-height: $game-board-height;
   text-align: center;
-  width: 31.7%;
+  width: 620px;
 }
+
+canvas {
+  border-radius: 3px;
+  border: 2px solid $red;
+  height: 100px;
+  width: 200px;
+}
+
 
 footer {
-  background-color: $footer;
-  font-size: 1.2em;
-  padding: 1em;
+  background-color: $footer-color;
+  font-size: 1.5em;
+  margin-top: .6em;
+  padding: .6em;
   text-align: center;
 }
 
@@ -64,6 +90,16 @@ strong {
   color: $red;
 }
 
-.box:hover {
-  background-color: $red;
+canvas:hover {
+  background-color: $canvas-hover;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: transparent;
+  color: $white;
+}
+
+small {
+  color: $red;
 }
