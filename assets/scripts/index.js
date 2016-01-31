@@ -13,7 +13,11 @@ var canvas = document.getElementsById('gameboard');
 var ctx = canvas.getContent("2d");
 
 var global = {
-  score: [0,0]
+  board: [[1,2,3],
+          [4,5,6],
+          [7,8,9]],
+  score: [0,0],
+  turn: true; // true = X, false = O
 };
 
 ctx.fillStyple = "#fff";
@@ -44,9 +48,14 @@ var winAnnounce = function() {
 
 var updateScore = function() {};
 var userClick = function () {};
-var clearAll = function() {};
 
-vvar
+var clearAll = function() {
+  for (let i = 0; i < global.board[0].length; i++) {
+    for((let x = 0; x < global.board[1].length; i++) {
+      global.board[i][x] = " ";
+    }
+  }
+};
 
 $(document).ready(() => {
   canvas.addEventListener('click', userClick);
