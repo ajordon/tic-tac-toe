@@ -9,7 +9,7 @@ $game-box-height: $game-board-height / 3;
 $game-box-width: $game-board-width / 3;
 $red: #f00;
 $white: #fff;
-$canvas-hover: #c3dfe8;
+$box-hover: #c3dfe8;
 
 body {
   background-color: $background;
@@ -33,7 +33,6 @@ body {
   font-size: 1.5em;
   margin: 0 auto;
   padding: 1em;
-  text-decoration: underline;
 }
 
 .score {
@@ -65,16 +64,21 @@ button {
   border: 2px solid $red;
   clear: both;
   margin: 1em auto;
-  min-height: $game-board-height;
+  min-height: 313px;
   text-align: center;
-  width: 620px;
+  width: 463px;
 }
 
-canvas {
+.box {
   border-radius: 3px;
   border: 2px solid $red;
+  color: $white;
+  float: left;
+  font-size: 5em;
+  font-weight: bold;
   height: 100px;
-  width: 200px;
+  text-align: center;
+  width: 150px;
 }
 
 
@@ -90,8 +94,8 @@ strong {
   color: $red;
 }
 
-canvas:hover {
-  background-color: $canvas-hover;
+.box:hover {
+  background-color: $box-hover;
   cursor: pointer;
 }
 
