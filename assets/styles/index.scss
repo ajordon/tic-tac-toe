@@ -18,6 +18,13 @@ body {
   font-size: 14px;
 }
 
+.winner {
+  color: $red;
+  font-size: 2em;
+  text-align: center;
+  text-shadow: -1.5px 0 $white, 0 1.5px $white, 1.5px 0 $white, 0 -1.5px $white;
+}
+
 #container {
   margin: auto;
   max-width: 1080px;
@@ -92,6 +99,7 @@ footer {
 
 strong {
   color: $red;
+  font-size: 1.4em;
 }
 
 .box:hover {
