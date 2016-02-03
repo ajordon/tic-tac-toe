@@ -93,7 +93,7 @@ let winAnnounce = function(win) {
 $(document).ready(() => {
   document.querySelector('.turn').innerHTML = "Turn: <br /><strong>X</strong>";
   $('.winner').hide();
-  $('#reset').on('click', function() {
+  $('.reset').on('click', function() {
     $('.box').empty();
     $('.box').css("background-color", "#151469");
     $('.winner').hide();

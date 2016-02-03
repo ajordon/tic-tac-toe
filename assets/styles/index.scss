@@ -1,4 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Bangers);
+$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+@import '~bootstrap-sass/assets/stylesheets/bootstrap';
+
 
 $background: #151469;
 $def-color: #f0f0f0;
@@ -18,11 +21,43 @@ body {
   font-size: 14px;
 }
 
+.navbar-brand {
+    margin-left: 1em;
+    border: 1px solid $background;
+    border-radius: 2px;
+}
+
+nav {
+  padding-top: .3em;
+  text-align: center
+}
+
+.navbar-signin-btn {
+  font-size: 1.5em;
+  color: black;
+}
+
 .winner {
   color: $red;
   font-size: 2em;
   text-align: center;
   text-shadow: -1.5px 0 $white, 0 1.5px $white, 1.5px 0 $white, 0 -1.5px $white;
+}
+
+.reset {
+  background-color: $red;
+  border-radius: 3px;
+  border: 3px solid $red;
+  color: $white;
+  cursor: pointer;
+  font-family: 'Bangers', cursive;
+  font-size: 1.7em;
+  font-weight: 1.2em;
+  margin-left: 1em;
+  padding: .6em;
+  position: relative;
+  text-align: center;
+  transition: all .2s ease-in-out;
 }
 
 #container {
@@ -53,27 +88,16 @@ body {
 }
 
 button {
-  background-color: $red;
-  border-radius: 3px;
-  border: 3px solid $red;
-  color: $white;
-  cursor: pointer;
-  font-family: 'Bangers', cursive;
-  font-size: 1.7em;
-  font-weight: 1.2em;
-  padding: .6em;
-  position: relative;
-  text-align: center;
-  transition: all .2s ease-in-out;
+
 }
 
 #gameboard {
   border: 2px solid $red;
   clear: both;
   margin: 1em auto;
-  min-height: 313px;
+  height: 305px;
   text-align: center;
-  width: 463px;
+  width: 455px;
 }
 
 .box {
@@ -107,9 +131,13 @@ strong {
   cursor: pointer;
 }
 
-button:hover {
+.reset:hover {
   background-color: transparent;
   color: $white;
+}
+
+.navbar-signin-btn:hover {
+    background-color: #5D5E5E;
 }
 
 small {
