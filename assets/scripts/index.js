@@ -28,33 +28,6 @@ let updateScore = function() {
   " / <small> O - </small>"  + global.score[1];
 };
 
-let winListner = function() {
-  let row1 = $('#top-left').text() + $('#top-middle').text() + $('#top-right').text();
-  let row2 = $('#middle-left').text() + $('#middle-middle').text() + $('#middle-right').text();
-  let row3 = $('#bottom-left').text() + $('#bottom-middle').text() + $('#bottom-right').text();
-
-  let colm1 = $('#top-left').text() + $('#middle-left').text() + $('#bottom-left').text();
-  let colm2 = $('#top-middle').text() + $('#middle-middle').text() + $('#bottom-middle').text();
-  let colm3 = $('#top-right').text() + $('#middle-right').text() + $('#bottom-right').text();;
-
-  let crossright = $('#top-left').text() + $('#middle-middle').text() + $('#bottom-right').text();
-  let crossleft = $('#top-right').text() + $('#middle-middle').text() + $('#bottom-left').text();
-
-  if (row1 === "XXX" || row2 === "XXX" || row3 === "XXX" ||
-      colm1 === "XXX" || colm2 === "XXX" || colm3 === "XXX" ||
-      crossright === "XXX" || crossleft === "XXX") {
-        winAnnounce("x");
-        // debugger;
-  } else if (row1 === "OOO" || row2 === "OOO" || row3 === "OOO" ||
-      colm1 === "OOO" || colm2 === "OOO" || colm3 === "OOO" ||
-      crossright === "OOO" || crossleft === "OOO") {
-          winAnnounce("o");
-  }
-  if (global.turnCount === 10) {
-    winAnnounce("d");
-  }
-};
-
 let winAnnounce = function(win) {
   switch (win) {
     case "x":
@@ -83,6 +56,33 @@ let winAnnounce = function(win) {
 
     default:
       break;
+  }
+};
+
+let winListner = function() {
+  let row1 = $('#top-left').text() + $('#top-middle').text() + $('#top-right').text();
+  let row2 = $('#middle-left').text() + $('#middle-middle').text() + $('#middle-right').text();
+  let row3 = $('#bottom-left').text() + $('#bottom-middle').text() + $('#bottom-right').text();
+
+  let colm1 = $('#top-left').text() + $('#middle-left').text() + $('#bottom-left').text();
+  let colm2 = $('#top-middle').text() + $('#middle-middle').text() + $('#bottom-middle').text();
+  let colm3 = $('#top-right').text() + $('#middle-right').text() + $('#bottom-right').text();
+
+  let crossright = $('#top-left').text() + $('#middle-middle').text() + $('#bottom-right').text();
+  let crossleft = $('#top-right').text() + $('#middle-middle').text() + $('#bottom-left').text();
+
+  if (row1 === "XXX" || row2 === "XXX" || row3 === "XXX" ||
+      colm1 === "XXX" || colm2 === "XXX" || colm3 === "XXX" ||
+      crossright === "XXX" || crossleft === "XXX") {
+        winAnnounce("x");
+        // debugger;
+  } else if (row1 === "OOO" || row2 === "OOO" || row3 === "OOO" ||
+      colm1 === "OOO" || colm2 === "OOO" || colm3 === "OOO" ||
+      crossright === "OOO" || crossleft === "OOO") {
+          winAnnounce("o");
+  }
+  if (global.turnCount === 10) {
+    winAnnounce("d");
   }
 };
 
