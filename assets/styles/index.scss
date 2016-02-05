@@ -32,9 +32,11 @@ nav {
   text-align: center
 }
 
-.navbar-sign-in, .sign-out, .change-password, .sign-up{
+.navbar-sign-in, .sign-out1, .change-password1, .sign-up1{
   font-size: 1.5em;
   color: black;
+  margin-left: .5em;
+  margin-right: .5em;
 }
 
 p, h4 {
@@ -46,6 +48,14 @@ p, h4 {
   font-size: 2em;
   text-align: center;
   text-shadow: -1.5px 0 $white, 0 1.5px $white, 1.5px 0 $white, 0 -1.5px $white;
+}
+
+.gameCount {
+  color: $red;
+  font-size: 2em;
+  text-align: center;
+  text-shadow: -1.5px 0 $white, 0 1.5px $white, 1.5px 0 $white, 0 -1.5px $white;
+  float:left;
 }
 
 .reset {
@@ -124,6 +134,7 @@ footer {
   margin-top: .6em;
   padding: .6em;
   text-align: center;
+  color: $white;
 }
 
 strong {

@@ -5,14 +5,13 @@
 
 // use require without a reference to ensure a file is bundled
 require('./user-manager');
+// require('./game-manager');
 
 // load sass manifest
 require('../styles/index.scss');
 
 let global = {
-  "board": [[1,2,3],
-          [4,5,6],
-          [7,8,9]],
+  "game": ["","","","","","","","",""],
   "score": [0,0],
   "turn": true, // true = X, false = O
   "turnCount": 1
@@ -64,7 +63,7 @@ let winAnnounce = function(win) {
       global.score[0]++;
       updateScore();
       global.turn = false;
-      clearAll();
+      setTimeout(clearAll, 5000);
       break;
 
     case "o":
@@ -73,26 +72,24 @@ let winAnnounce = function(win) {
       global.score[1]++;
       updateScore();
       global.turn = true;
-      clearAll();
+      setTimeout(clearAll, 5000);
       break;
 
     case "d":
       $('.winner').text("Draw!");
       $('.winner').show();
-      clearAll();
+      setTimeout(clearAll, 5000);
       break;
 
     default:
       break;
   }
-
-  updateScore();
-  clearAll();
 };
 
 $(document).ready(() => {
   document.querySelector('.turn').innerHTML = "Turn: <br /><strong>X</strong>";
   $('.winner').hide();
+  $('.gameCount').hide();
   $('.sign-out1').hide();
   $('.change-password1').hide();
   $('.reset').on('click', function() {
@@ -121,6 +118,7 @@ $(document).ready(() => {
       global.turn = true;
       document.querySelector('.turn').innerHTML = "Turn: <br /><strong>X</strong>";
     }
+    // global.board = gameboardBox
     global.turnCount++;
     winListner();
   });

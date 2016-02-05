@@ -5,6 +5,7 @@ const myApp = {
 };
 
 $(document).ready(() => {
+//----------------SIGN UP----------------
   $('#signup-form').on('submit', function(e) {
     e.preventDefault();
     var formData = new FormData(e.target);
@@ -25,6 +26,7 @@ $(document).ready(() => {
     });
   });
 
+//----------------SIGN IN----------------
   $('#signin-form').on('submit', function(e) {
     e.preventDefault();
     var formData = new FormData(e.target);
@@ -49,6 +51,7 @@ $(document).ready(() => {
     });
   });
 
+//----------------CHANGE PASSWORD----------------
   $('#changepass-form').on('submit', function(e) {
     e.preventDefault();
     if(!myApp.user) {
@@ -75,6 +78,7 @@ $(document).ready(() => {
     });
   });
 
+//----------------SIGN OUT----------------
   $('.sign-out2').on('click', function(e) {
     e.preventDefault();
     $.ajax({
