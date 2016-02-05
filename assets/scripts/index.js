@@ -36,7 +36,7 @@ let winAnnounce = function(win) {
       global.score[0]++;
       updateScore();
       global.turn = false;
-      setTimeout(clearAll, 5000);
+      setTimeout(clearAll, 3000);
       break;
 
     case "o":
@@ -45,13 +45,13 @@ let winAnnounce = function(win) {
       global.score[1]++;
       updateScore();
       global.turn = true;
-      setTimeout(clearAll, 5000);
+      setTimeout(clearAll, 3000);
       break;
 
     case "d":
       $('.winner').text("Draw!");
       $('.winner').show();
-      setTimeout(clearAll, 5000);
+      setTimeout(clearAll, 3000);
       break;
 
     default:
@@ -60,16 +60,16 @@ let winAnnounce = function(win) {
 };
 
 let winListner = function() {
-  let row1 = $('#top-left').text() + $('#top-middle').text() + $('#top-right').text();
-  let row2 = $('#middle-left').text() + $('#middle-middle').text() + $('#middle-right').text();
-  let row3 = $('#bottom-left').text() + $('#bottom-middle').text() + $('#bottom-right').text();
+  let row1 = $('#top-left1').text() + $('#top-middle2').text() + $('#top-right3').text();
+  let row2 = $('#middle-left4').text() + $('#middle-middle5').text() + $('#middle-right6').text();
+  let row3 = $('#bottom-left7').text() + $('#bottom-middle8').text() + $('#bottom-right9').text();
 
-  let colm1 = $('#top-left').text() + $('#middle-left').text() + $('#bottom-left').text();
-  let colm2 = $('#top-middle').text() + $('#middle-middle').text() + $('#bottom-middle').text();
-  let colm3 = $('#top-right').text() + $('#middle-right').text() + $('#bottom-right').text();
+  let colm1 = $('#top-left1').text() + $('#middle-left4').text() + $('#bottom-left7').text();
+  let colm2 = $('#top-middle2').text() + $('#middle-middle5').text() + $('#bottom-middle8').text();
+  let colm3 = $('#top-right3').text() + $('#middle-right6').text() + $('#bottom-right9').text();
 
-  let crossright = $('#top-left').text() + $('#middle-middle').text() + $('#bottom-right').text();
-  let crossleft = $('#top-right').text() + $('#middle-middle').text() + $('#bottom-left').text();
+  let crossright = $('#top-left1').text() + $('#middle-middle5').text() + $('#bottom-right9').text();
+  let crossleft = $('#top-right3').text() + $('#middle-middle5').text() + $('#bottom-left7').text();
 
   if (row1 === "XXX" || row2 === "XXX" || row3 === "XXX" ||
       colm1 === "XXX" || colm2 === "XXX" || colm3 === "XXX" ||
@@ -87,19 +87,25 @@ let winListner = function() {
 };
 
 $(document).ready(() => {
+  //Initialze Board
   document.querySelector('.turn').innerHTML = "Turn: <br /><strong>X</strong>";
   $('.winner').hide();
   $('.gameCount').hide();
   $('.sign-out1').hide();
   $('.change-password1').hide();
+
+  //Declair reset button
   $('.reset').on('click', function() {
     $('.box').empty();
     $('.box').css("background-color", "#151469");
     $('.winner').hide();
+    global.score.fill(0);
+    updateScore();
     global.turnCount = 1;
   });
 
-  $('#gameboard').on('click', function(event) {
+  //Gameboard click logic
+  $('.gameboard').on('click', function(event) {
     event.preventDefault();
     let gameboardBox = $(event.target);
     $('.winner').hide();

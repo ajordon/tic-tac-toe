@@ -41,7 +41,7 @@ $(document).ready(() => {
       console.log(data);
       console.log("Welcome " + data.user.email);
       $('#myModal1').modal('hide');
-      $('.navbar-sign-in').hide();
+      $('.sign-in1').hide();
       $('.sign-up1').hide();
       $('.sign-out1').show();
       $('.change-password1').show();
@@ -89,7 +89,7 @@ $(document).ready(() => {
       }
     }).done(function() {
       $('#myModal4').modal('hide');
-      $('.navbar-sign-in').show();
+      $('.sign-in1').show();
       $('.sign-up1').show();
       $('.sign-out1').hide();
       $('.change-password1').hide();
