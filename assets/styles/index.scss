@@ -32,8 +32,12 @@ nav {
   text-align: center
 }
 
-.navbar-signin-btn {
+.navbar-sign-in, .sign-out, .change-password, .sign-up{
   font-size: 1.5em;
+  color: black;
+}
+
+p, h4 {
   color: black;
 }
 
@@ -87,9 +91,6 @@ nav {
   padding-left: 2em;
 }
 
-button {
-
-}
 
 #gameboard {
   border: 2px solid $red;
@@ -112,6 +113,10 @@ button {
   width: 150px;
 }
 
+button {
+  display: inline-block;;
+  margin: .3em;
+}
 
 footer {
   background-color: $footer-color;
@@ -136,7 +141,7 @@ strong {
   color: $white;
 }
 
-.navbar-signin-btn:hover {
+.sign-in:hover {
     background-color: #5D5E5E;
 }
 

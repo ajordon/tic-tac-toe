@@ -4,7 +4,7 @@
 // var example = require('./example');
 
 // use require without a reference to ensure a file is bundled
-require('./example');
+require('./user-manager');
 
 // load sass manifest
 require('../styles/index.scss');
@@ -93,6 +93,8 @@ let winAnnounce = function(win) {
 $(document).ready(() => {
   document.querySelector('.turn').innerHTML = "Turn: <br /><strong>X</strong>";
   $('.winner').hide();
+  $('.sign-out1').hide();
+  $('.change-password1').hide();
   $('.reset').on('click', function() {
     $('.box').empty();
     $('.box').css("background-color", "#151469");
