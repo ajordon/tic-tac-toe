@@ -47,8 +47,9 @@ $(document).ready(() => {
         }
       }).done(function(data) {
         myApp.user.game = data.game;
-      })
-    })
+      }).fail(function(jqxhr) {
+        console.error(jqxhr);
+    });
 });
 
 var formDataGame = new FormData();

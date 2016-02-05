@@ -11,12 +11,13 @@ require('./user-manager');
 require('../styles/index.scss');
 
 let global = {
-  "game": ["","","","","","","","",""],
+  "game": [" "," "," "," "," "," "," "," "," "],
   "score": [0,0],
   "turn": true, // true = X, false = O
-  "turnCount": 1
+  "turnCount": 1,
 };
 
+let lastPos = 0;
 let clearAll = function() {
   $('.box').empty();
   $('.box').css("background-color", "#151469");
@@ -75,16 +76,58 @@ let winListner = function() {
       colm1 === "XXX" || colm2 === "XXX" || colm3 === "XXX" ||
       crossright === "XXX" || crossleft === "XXX") {
         winAnnounce("x");
-        // debugger;
   } else if (row1 === "OOO" || row2 === "OOO" || row3 === "OOO" ||
       colm1 === "OOO" || colm2 === "OOO" || colm3 === "OOO" ||
       crossright === "OOO" || crossleft === "OOO") {
           winAnnounce("o");
-  }
-  if (global.turnCount === 10) {
+  }else if (global.turnCount === 10) {
     winAnnounce("d");
   }
 };
+
+// let updateBoard = function(e, lastPos) {
+//   if (global.turnCount === 1) {
+//     $.ajax({
+//       url: myApp.baseUrl + '/create',
+//       method: 'POST',
+//       data: {
+//         "game": {
+//           "id": 1,
+//           "cells": ["","","","","","","","",""],
+//           "over": false,
+//           "player_x": {
+//             "id": myApp.user.id,
+//             "email": myApp.user.email
+//           },
+//           "player_o": null
+//         }
+//       }
+//     }).done(function(data) {
+//       myApp.user.game = data.game;
+//     }).fail(function(jqxhr) {
+//       console.error(jqxhr);
+//     });
+//   }
+//   else {
+//     $.ajax({
+//       url: myApp.baseUrl + '/update',
+//       method: 'PATCH',
+//       data: {
+//         "game": {
+//           "cell": {
+//             "index": lastPos,
+//             "value": e.target.text()
+//           },
+//           "over": false
+//         }
+//       }
+//     }).done(function(data) {
+//       myApp.user.game = data.game;
+//     }).fail(function(jqxhr) {
+//       console.error(jqxhr);
+//     });
+//   }
+// };
 
 $(document).ready(() => {
   //Initialze Board
@@ -109,24 +152,29 @@ $(document).ready(() => {
     event.preventDefault();
     let gameboardBox = $(event.target);
     $('.winner').hide();
+    lastPos = gameboardBox.attr("position");
     if (gameboardBox.text() !== "") {
       $('.winner').show().text("The box is taken!");
       return;
     }
+
     if (global.turn === true) {
       gameboardBox.text("X");
       gameboardBox.css("background-color", "green");
       global.turn = false;
+      global.game[lastPos] = "X";
       document.querySelector('.turn').innerHTML = "Turn: <br /><strong>O</strong>";
     } else {
       gameboardBox.text("O");
       gameboardBox.css("background-color", "blue");
       global.turn = true;
+      global.game[lastPos] = "O";
       document.querySelector('.turn').innerHTML = "Turn: <br /><strong>X</strong>";
     }
-    // global.board = gameboardBox
+
     global.turnCount++;
     winListner();
+    // updateBoard(event, lastPos);
   });
 
   updateScore();
