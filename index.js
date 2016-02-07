@@ -4,6 +4,7 @@
 // var example = require('./example');
 
 // load manifests
+require('./assets/scripts/userManager.js');
 require('./assets/scripts/index.js');
 require('./assets/styles/index.scss');
 

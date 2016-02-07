@@ -4,20 +4,21 @@
 // var example = require('./example');
 
 // use require without a reference to ensure a file is bundled
-require('./user-manager');
-// require('./game-manager');
-
+require('./userManager.js');
 // load sass manifest
 require('../styles/index.scss');
 
+let lastPos = 0;
 let global = {
   "game": [" "," "," "," "," "," "," "," "," "],
   "score": [0,0],
   "turn": true, // true = X, false = O
   "turnCount": 1,
+  "gameOver" : false,
 };
 
-let lastPos = 0;
+//------------------------------------------------------------------------------
+//------------------------------Game Page Logic---------------------------------
 let clearAll = function() {
   $('.box').empty();
   $('.box').css("background-color", "#151469");
@@ -37,6 +38,7 @@ let winAnnounce = function(win) {
       global.score[0]++;
       updateScore();
       global.turn = false;
+      updateGameCount();
       setTimeout(clearAll, 3000);
       break;
 
@@ -46,6 +48,7 @@ let winAnnounce = function(win) {
       global.score[1]++;
       updateScore();
       global.turn = true;
+      updateGameCount();
       setTimeout(clearAll, 3000);
       break;
 
@@ -76,59 +79,18 @@ let winListner = function() {
       colm1 === "XXX" || colm2 === "XXX" || colm3 === "XXX" ||
       crossright === "XXX" || crossleft === "XXX") {
         winAnnounce("x");
+        global.gameOver = true;
   } else if (row1 === "OOO" || row2 === "OOO" || row3 === "OOO" ||
       colm1 === "OOO" || colm2 === "OOO" || colm3 === "OOO" ||
       crossright === "OOO" || crossleft === "OOO") {
-          winAnnounce("o");
+        winAnnounce("o");
+        global.gameOver = true;
   }else if (global.turnCount === 10) {
     winAnnounce("d");
   }
 };
 
-// let updateBoard = function(e, lastPos) {
-//   if (global.turnCount === 1) {
-//     $.ajax({
-//       url: myApp.baseUrl + '/create',
-//       method: 'POST',
-//       data: {
-//         "game": {
-//           "id": 1,
-//           "cells": ["","","","","","","","",""],
-//           "over": false,
-//           "player_x": {
-//             "id": myApp.user.id,
-//             "email": myApp.user.email
-//           },
-//           "player_o": null
-//         }
-//       }
-//     }).done(function(data) {
-//       myApp.user.game = data.game;
-//     }).fail(function(jqxhr) {
-//       console.error(jqxhr);
-//     });
-//   }
-//   else {
-//     $.ajax({
-//       url: myApp.baseUrl + '/update',
-//       method: 'PATCH',
-//       data: {
-//         "game": {
-//           "cell": {
-//             "index": lastPos,
-//             "value": e.target.text()
-//           },
-//           "over": false
-//         }
-//       }
-//     }).done(function(data) {
-//       myApp.user.game = data.game;
-//     }).fail(function(jqxhr) {
-//       console.error(jqxhr);
-//     });
-//   }
-// };
-
+//-------------------When the webpage is finished loading-------------------
 $(document).ready(() => {
   //Initialze Board
   document.querySelector('.turn').innerHTML = "Turn: <br /><strong>X</strong>";
@@ -172,10 +134,86 @@ $(document).ready(() => {
       document.querySelector('.turn').innerHTML = "Turn: <br /><strong>X</strong>";
     }
 
+    updateBoard(event, lastPos);
     global.turnCount++;
     winListner();
-    // updateBoard(event, lastPos);
   });
 
   updateScore();
 });
+
+//------------------------------------------------------------------------------
+//--------------------------------GAME LOGIC------------------------------------
+
+let updateBoard = function(e, lastPos) {
+  let formData = new FormData();
+  let gameboardBox = $(e.target);
+  if (global.turnCount === 1) {
+    $.ajax({
+      url: myApp.baseUrl + '/games',
+      method: 'POST',
+      headers: {
+        Authorization: 'Token token=' + myApp.user.token,
+      },
+      contentType: false,
+      processData: false,
+      data: formData,
+    }).done(function(data) {
+      myApp.user.game = data.game;
+      console.log(data.game);
+    }).fail(function(jqxhr) {
+      console.error(jqxhr);
+    });
+  }
+  else if (global.gameOver === false) {
+    console.log("Test: " + gameboardBox.text());
+
+    $.ajax({
+      url: myApp.baseUrl + '/games/' + myApp.user.game.id,
+      method: 'PATCH',
+      headers: {
+        Authorization: 'Token token=' + myApp.user.token,
+      },
+      data: {
+        "game": {
+          "id": myApp.user.game.id,
+          "cell": global.game,
+          "player_x": {
+            "id": myApp.user.id,
+            "email": myApp.user.email
+          },
+        }
+      },
+      contentType: false,
+      processData: false,
+      data: formData,
+    }).done(function(data) {
+      myApp.user.game = data.game;
+    }).fail(function(jqxhr) {
+      console.error(jqxhr);
+    });
+  }
+  else {
+    $.ajax({
+      url: myApp.baseUrl + '/games/' + myApp.user.game.id,
+      method: 'PATCH',
+      headers: {
+        Authorization: 'Token token=' + myApp.user.token,
+      },
+      data: {
+        "game": {
+          "cells": global.game,
+          "over": true
+        }
+      },
+      contentType: false,
+      processData: false,
+      data: formData,
+    }).done(function(data) {
+      myApp.user.game = data.game;
+    }).fail(function(jqxhr) {
+      console.error(jqxhr);
+    });
+    global.gameOver = false;
+  }
+};
