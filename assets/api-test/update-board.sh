@@ -1,7 +1,7 @@
 EMAIL="aaron@me.com"
-TOKEN="037a9d90e3c5a927ca62e41f2e97dc54"
+TOKEN="a23cc4b7cf6723aad52ec87845a63aa1"
 USER_ID="59"
-GAME_ID="1913"
+GAME_ID="1914"
 BOARD="["x","x","x","o","","o","","",""]"
 
 BASE_URL="http://tic-tac-toe.wdibos.com"
@@ -17,14 +17,8 @@ json() {
       --header "Authorization: Token token=${TOKEN}" \
       --data "{
         \"game\": {
-          \"id\": \"${GAME_ID}\",
           \"cells\": \"${BOARD}\",
-          \"over\": \"true\",
-          \"player_x\": {
-            \"id\": \"${USER_ID}\",
-            \"email\": \"${EMAIL}\"
-            },
-          \"player_o\": \"null\"
+          \"over\": \"true\"
         }
       }"
 

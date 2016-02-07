@@ -10,7 +10,7 @@ require('../styles/index.scss');
 
 let lastPos = 0;
 let global = {
-  "game": [" "," "," "," "," "," "," "," "," "],
+  "game": ["","","","","","","","",""],
   "score": [0,0],
   "turn": true, // true = X, false = O
   "turnCount": 1,
@@ -23,6 +23,8 @@ let clearAll = function() {
   $('.box').empty();
   $('.box').css("background-color", "#151469");
   global.turnCount = 1;
+  global.game = ["","","","","","","","",""];
+  global.gameOver = false;
 };
 
 let updateScore = function() {
@@ -31,12 +33,14 @@ let updateScore = function() {
 };
 
 let winAnnounce = function(win) {
+
   switch (win) {
     case "x":
       $('.winner').text("X Wins!").css("color", "green");
       $('.winner').show();
       global.score[0]++;
       updateScore();
+      updateBoard();
       global.turn = false;
       updateGameCount();
       setTimeout(clearAll, 3000);
@@ -47,6 +51,7 @@ let winAnnounce = function(win) {
       $('.winner').show();
       global.score[1]++;
       updateScore();
+      updateBoard();
       global.turn = true;
       updateGameCount();
       setTimeout(clearAll, 3000);
@@ -166,8 +171,6 @@ let updateBoard = function(e, lastPos) {
     });
   }
   else if (global.gameOver === false) {
-    console.log("Test: " + gameboardBox.text());
-
     $.ajax({
       url: myApp.baseUrl + '/games/' + myApp.user.game.id,
       method: 'PATCH',
@@ -176,19 +179,15 @@ let updateBoard = function(e, lastPos) {
       },
       data: {
         "game": {
-          "id": myApp.user.game.id,
-          "cell": global.game,
-          "player_x": {
-            "id": myApp.user.id,
-            "email": myApp.user.email
-          },
+          "cells": global.game,
         }
       },
       contentType: false,
       processData: false,
-      data: formData,
+      // data: formData,
     }).done(function(data) {
-      myApp.user.game = data.game;
+      console.log(data.game);
+      // myApp.user.game = data.game;
     }).fail(function(jqxhr) {
       console.error(jqxhr);
     });
@@ -208,12 +207,10 @@ let updateBoard = function(e, lastPos) {
       },
       contentType: false,
       processData: false,
-      data: formData,
     }).done(function(data) {
-      myApp.user.game = data.game;
+      console.log(data.game);
     }).fail(function(jqxhr) {
       console.error(jqxhr);
     });
-    global.gameOver = false;
   }
 };
