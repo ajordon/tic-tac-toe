@@ -40,7 +40,6 @@ let winAnnounce = function(win) {
       $('.winner').show();
       global.score[0]++;
       updateScore();
-      updateBoard();
       global.turn = false;
       updateGameCount();
       setTimeout(clearAll, 3000);
@@ -51,7 +50,6 @@ let winAnnounce = function(win) {
       $('.winner').show();
       global.score[1]++;
       updateScore();
-      updateBoard();
       global.turn = true;
       updateGameCount();
       setTimeout(clearAll, 3000);
@@ -85,11 +83,15 @@ let winListner = function() {
       crossright === "XXX" || crossleft === "XXX") {
         winAnnounce("x");
         global.gameOver = true;
+        updateBoard();
+        updateGameCount();
   } else if (row1 === "OOO" || row2 === "OOO" || row3 === "OOO" ||
       colm1 === "OOO" || colm2 === "OOO" || colm3 === "OOO" ||
       crossright === "OOO" || crossleft === "OOO") {
         winAnnounce("o");
         global.gameOver = true;
+        updateBoard();
+        updateGameCount();
   }else if (global.turnCount === 10) {
     winAnnounce("d");
   }
@@ -149,28 +151,29 @@ $(document).ready(() => {
 
 //------------------------------------------------------------------------------
 //--------------------------------GAME LOGIC------------------------------------
-
-let updateBoard = function(e, lastPos) {
-  let formData = new FormData();
-  let gameboardBox = $(e.target);
-  if (global.turnCount === 1) {
+//----------------Update Game Count----------------
+let updateGameCount = function () {
     $.ajax({
-      url: myApp.baseUrl + '/games',
-      method: 'POST',
+      url: myApp.baseUrl + '/games?over=true',
+      method: 'GET',
       headers: {
         Authorization: 'Token token=' + myApp.user.token,
-      },
-      contentType: false,
-      processData: false,
-      data: formData,
-    }).done(function(data) {
-      myApp.user.game = data.game;
-      console.log(data.game);
+      }
+    }).done(function(data)  {
+      let count = 0;
+      for (let i = 0; i < data.games.length; i++) {
+        count++;
+      }
+      $('.gameCount').text("User: " + myApp.user.email  + "  |  " + " Win Ratio: " + ((count / data.games.length) * 100) + "%");
+      $('.gameCount').show();
     }).fail(function(jqxhr) {
       console.error(jqxhr);
     });
-  }
-  else if (global.gameOver === false) {
+  };
+
+let updateBoard = function(e, lastPos) {
+  let formData = new FormData();
+  if (global.gameOver === true) {
     $.ajax({
       url: myApp.baseUrl + '/games/' + myApp.user.game.id,
       method: 'PATCH',
@@ -180,37 +183,55 @@ let updateBoard = function(e, lastPos) {
       data: {
         "game": {
           "cells": global.game,
+          "over": true,
         }
       },
-      contentType: false,
-      processData: false,
-      // data: formData,
     }).done(function(data) {
       console.log(data.game);
-      // myApp.user.game = data.game;
+      myApp.user.game = data.game;
     }).fail(function(jqxhr) {
       console.error(jqxhr);
     });
   }
   else {
-    $.ajax({
-      url: myApp.baseUrl + '/games/' + myApp.user.game.id,
-      method: 'PATCH',
-      headers: {
-        Authorization: 'Token token=' + myApp.user.token,
-      },
-      data: {
-        "game": {
-          "cells": global.game,
-          "over": true
-        }
-      },
-      contentType: false,
-      processData: false,
-    }).done(function(data) {
-      console.log(data.game);
-    }).fail(function(jqxhr) {
-      console.error(jqxhr);
-    });
+    let gameboardBox = $(e.target);
+
+    if (global.turnCount === 1) {
+      $.ajax({
+        url: myApp.baseUrl + '/games',
+        method: 'POST',
+        headers: {
+          Authorization: 'Token token=' + myApp.user.token,
+        },
+        contentType: false,
+        processData: false,
+        data: formData,
+      }).done(function(data) {
+        myApp.user.game = data.game;
+        updateGameCount();
+        console.log(data.game);
+      }).fail(function(jqxhr) {
+        console.error(jqxhr);
+      });
+    }
+    else { //(global.gameOver === false)
+      $.ajax({
+        url: myApp.baseUrl + '/games/' + myApp.user.game.id,
+        method: 'PATCH',
+        headers: {
+          Authorization: 'Token token=' + myApp.user.token,
+        },
+        data: {
+          "game": {
+            "cells": global.game,
+          }
+        },
+      }).done(function(data) {
+        console.log(data.game);
+        myApp.user.game = data.game;
+      }).fail(function(jqxhr) {
+        console.error(jqxhr);
+      });
   }
+}
 };
