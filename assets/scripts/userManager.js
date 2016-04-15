@@ -46,6 +46,9 @@ $(document).ready(() => {
       $('.sign-up1').hide();
       $('.sign-out1').show();
       $('.change-password1').show();
+      $('.getStarted').hide();
+      $('.gameboard').show();
+      $('.gameCount').show();
       myApp.user = data.user;
     }).fail(function(jqxhr) {
       console.error(jqxhr);
@@ -94,6 +97,9 @@ $(document).ready(() => {
       $('.sign-up1').show();
       $('.sign-out1').hide();
       $('.change-password1').hide();
+      $('.getStarted').show();
+      $('.gameboard').hide();
+      $('.gameCount').hide();
     }).fail(function(jqxhr) {
       console.error(jqxhr);
     });

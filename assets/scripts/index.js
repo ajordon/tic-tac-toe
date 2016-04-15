@@ -105,6 +105,8 @@ $(document).ready(() => {
   $('.gameCount').hide();
   $('.sign-out1').hide();
   $('.change-password1').hide();
+  $('.getStarted').show();
+  $('.gameboard').hide();
 
   //Declair reset button
   $('.reset').on('click', function() {
